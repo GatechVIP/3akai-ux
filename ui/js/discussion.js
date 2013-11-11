@@ -92,18 +92,22 @@ require(['jquery','oae.core'], function($, oae) {
      * Render the discussions's topic, if available
      */
     var setUpTopic = function() {
-        if (discussionProfile.description) {
-            var topic = oae.api.util.security().encodeForHTMLWithLinks(discussionProfile.description).replace(/\n/g, '<br/>');
-            var vote ='<button id="button-vote" class="btn btn-large" data-toggle="button" style="margin-right: 20px;"><i  class="icon-arrow-up"></i> 100</button>';
-            $('#discussion-topic').html(vote + topic);
-            var b = $('#button-vote');
-            b.click(function() {
-                var arrow = '<i class="icon-arrow-up"></i> ';
-                var s = (b.html() === arrow + '100') ? arrow + '101' : arrow + '100';
-                b.html(s);
-            });
-            $('#discussion-topic-container').show();
+        if (!discussionProfile.description) {
+            return;
         }
+        var topic = oae.api.util.security().encodeForHTMLWithLinks(discussionProfile.description).replace(/\n/g, '<br/>');
+        $('#discussion-topic-text').html(topic);
+        
+        $('#discussion-signature').text(discussionProfile.createdBy.displayName);
+                
+        // Vote button behavior.
+        var b = $('#button-vote');
+        b.click(function() {
+           var t = (b.text() === '100') ? '101' : '100';
+           b.text(t);
+        });
+              
+        $('#discussion-topic-container').show();
     };
 
 
