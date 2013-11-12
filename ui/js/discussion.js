@@ -103,8 +103,9 @@ require(['jquery','oae.core'], function($, oae) {
         // Vote button behavior.
         var b = $('#button-vote');
         b.click(function() {
-           var t = (b.text() === '100') ? '101' : '100';
-           b.text(t);
+            var arrow = '<i class="icon-arrow-up"></i> ';
+            var t = (b.html() === arrow + '100') ? arrow + '101' : arrow + '100';
+            b.html(t);
         });
               
         $('#discussion-topic-container').show();
