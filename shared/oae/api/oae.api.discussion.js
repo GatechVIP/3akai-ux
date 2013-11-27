@@ -53,7 +53,7 @@ define(['exports', 'jquery', 'underscore'], function(exports, $, _) {
      * @param  {Discussion}     [callback.discussion]     Discussion object representing the created discussion
      * @throws {Error}                                    Error thrown when no discussion topic has been provided
      */
-    var createDiscussion = exports.createDiscussion = function(displayName, description, visibility, managers, members, callback) {
+    var createDiscussion = exports.createDiscussion = function(displayName, description, visibility, managers, members, isQa, callback) {
         if (!displayName) {
             throw new Error('A valid description topic should be provided');
         }
@@ -66,7 +66,8 @@ define(['exports', 'jquery', 'underscore'], function(exports, $, _) {
             'description': description,
             'visibility': visibility,
             'managers': managers,
-            'members': members
+            'members': members,
+            'isQa': isQa
         };
 
         $.ajax({

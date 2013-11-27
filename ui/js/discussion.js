@@ -14,14 +14,13 @@
  */
 
 require(['jquery','oae.core'], function($, oae) {
-
+     
     // Get the discussion id from the URL. The expected URL is `/discussion/<tenantId>/<resourceId>`.
     // The discussion id will then be `d:<tenantId>:<resourceId>`
     var discussionId = 'd:' + $.url().segment(2) + ':' + $.url().segment(3);
 
     // Variable used to cache the requested discussion profile
     var discussionProfile = null;
-
 
     ///////////////////////////////////////
     // DISCUSSION PROFILE INITIALIZATION //
@@ -93,11 +92,23 @@ require(['jquery','oae.core'], function($, oae) {
      * Render the discussions's topic, if available
      */
     var setUpTopic = function() {
-        if (discussionProfile.description) {
-            var topic = oae.api.util.security().encodeForHTMLWithLinks(discussionProfile.description).replace(/\n/g, '<br/>');
-            $('#discussion-topic').html(topic);
-            $('#discussion-topic-container').show();
+        if (!discussionProfile.description) {
+            return;
         }
+        var topic = oae.api.util.security().encodeForHTMLWithLinks(discussionProfile.description).replace(/\n/g, '<br/>');
+        $('#discussion-topic-text').html(topic);
+        
+        $('#discussion-signature').text(discussionProfile.createdBy.displayName);
+                
+        // Vote button behavior.
+        var b = $('#button-vote');
+        b.click(function() {
+            var arrow = '<i class="icon-arrow-up"></i> ';
+            var t = (b.html() === arrow + '100') ? arrow + '101' : arrow + '100';
+            b.html(t);
+        });
+              
+        $('#discussion-topic-container').show();
     };
 
 

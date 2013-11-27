@@ -92,7 +92,20 @@
 
             <!-- DISCUSSION TOPIC -->
             <div id="discussion-topic-container" class="hide">
-                <div id="discussion-topic" class="well"><!-- --></div>
+                <div id="discussion-topic" class = "well" style="overflow: auto;">
+                    <button id="button-vote" class="btn btn-large" data-toggle="button" style="margin-right: 20px;"><i class="icon-arrow-up"></i> 100</button>
+                    <span id="discussion-topic-text"></span>
+                    <span class="pull-right">
+                        <div>Created by:</div>
+                        <img src="http://talks.golang.org/2013/highperf/appenginegophercolor.jpg" width=100 height=100>
+                        <div id="discussion-signature"></div>
+                    </span>
+                </div>
+            </div>
+
+            <!-- CHOSEN ANSWER -->
+            <div id="discussion-answer-container" class="hide" style="padding-right: 50px;">
+                <i class="icon-check"></i> <span id="discussion-answer"></span>
             </div>
 
             <!-- DISCUSSION -->
